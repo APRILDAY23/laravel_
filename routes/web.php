@@ -26,7 +26,11 @@ Route::get('/', [ViewController::class, 'index']);
 Route::post('save', [ViewController::class, 'save'])->name('save');
 Route::post('save1', [ViewController::class, 'save1'])->name('save1');
 Route::post('check', [ViewController::class, 'check'])->name('check');
+Route::post('view', [ViewController::class, 'view'])->name('view');
 Route::get('sign', [ViewController::class, 'sign'])->name('signup');
+Route::delete('delete/{id}', [ViewController::class, 'delete'])->name('delete');
+Route::get('edit/{id}', [ViewController::class, 'edit'])->name('edit');
+Route::post('update', [ViewController::class, 'update'])->name('update');   
 
 
 Route::get('logout', [ViewController::class, 'logout'])->name('logout');

@@ -38,6 +38,8 @@
         left: 25%;
     }
 
+   
+
     #post {
         position: absolute;
         top: 55%;

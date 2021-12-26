@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\ViewController;
+//use App\Http\Controllers\ViewController;
 
 // echo '<div>';
 // echo '<p id="title">Hello User</p>';
@@ -58,9 +58,19 @@ use App\Http\Controllers\ViewController;
 </style>
 <body>
     <div>
-        <p id="title">Hello User</p>
+        <p id="title"><span class="auto-input"></p>
         <a href="/login"><button id="login">Login</button></a>
         <a href="/sign"><button id="sign_up">Sign Up</button></a>
+
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+        <script>
+            var typed = new Typed(".auto-input", {
+                strings: ["Hello User", "How are you?" , "Lets do some coding"],
+                typeSpeed: 100,
+                loop: true
+            })
+        </script>
         </div>
 </body>
 </html>

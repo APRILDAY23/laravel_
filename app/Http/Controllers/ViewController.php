@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ViewController extends Controller
@@ -68,6 +69,7 @@ class ViewController extends Controller
         }
     }
 
+  
     public function logout() {
         if(session()->has('LoggedUser')) {
             session()->pull('LoggedUser');
@@ -97,7 +99,8 @@ class ViewController extends Controller
           $save1 = $post->save();
   
           if($save1) {
-              return back()->with('success', 'Post Successfull');            
+             // return back()->with('success', 'Post Successfull');
+              return redirect('admin');            
             } else {
               return back()->with('fail', 'Something Went Wrong | 400');
           }
@@ -106,16 +109,65 @@ class ViewController extends Controller
 
       }
 
+      public function view(Request $request) {
+        $postinfo = Post::where('title', '=' , $request->title)->first();
+
+        if(!$postinfo) {
+            return back()->with('fail', 'Oh Oh.. Post Not Found');
+        } else {
+            if(Post::view($request->id, $postinfo->id)) {
+                $request->session()->put('Info', $postinfo->id);
+                return redirect('admin');
+            } else {
+                return back()->with('fail', 'Oh Oh.. Post Not Found');
+            }
+        }
+    }
+
 
         
     public function admin() {
         $data = ['LoggedUserInfo'=>Admin::where('id', '=', session('LoggedUser'))->first()];
         return view('admin', $data);
 
+        $postdata = ['PostInfo'=>Post::where('id', '=', session('Info'))->first()];
+        return view('admin', $postdata);
+
     
 
      
 
     }
+
+    public function delete($id) {
+        error_reporting(0);
+        Post::find($id)->delete();
+        return redirect('admin');
+    }
+
+    public function edit($id) {
+        error_reporting(0);
+        $data =  Post::find($id);
+        return view('edit', ['data'=>$data]);
+      
+    }
+
+    public function update(Request $request) {
+            $data = Post::find($request->id);
+            $data->title = $request->title1;
+            $data->description = $request->description1;
+            $data->pic = $request->uploadFile1;
+            $data->save();
+            return redirect('admin');
+
+            // if($sa) {
+            //     
+            // } else {
+            //     return 'Error';
+            // }
+           
+    }
+    
+
 
 }
