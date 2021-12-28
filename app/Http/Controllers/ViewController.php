@@ -101,6 +101,7 @@ class ViewController extends Controller
           if($save1) {
              // return back()->with('success', 'Post Successfull');
               return redirect('admin');            
+              
             } else {
               return back()->with('fail', 'Something Went Wrong | 400');
           }

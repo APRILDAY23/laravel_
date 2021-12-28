@@ -152,7 +152,7 @@ error_reporting(0);
     </style>
     <body onload="myFunction()">
         <h1>Admin Page</h1>
-        <a href="/announce"><button id="announce">+ Add A Announcement</button></a>
+        <a href="{{ route('announce') }}"><button id="announce">+ Add A Announcement</button></a>
 <div id="box" loading="eager">
     <h1 id="user">User Information</h1>
         <div id="table">
